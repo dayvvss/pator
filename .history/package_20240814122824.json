@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "dev": "next dev -p 3002",
-    "build": "npm cache clean --force && next build",
+    "build": "next build",
     "start": "next start -p 3002",
     "export": "next export",
     "lint": "eslint --fix \"src/**/*.{js,jsx}\"",
