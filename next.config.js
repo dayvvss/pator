@@ -15,6 +15,7 @@ module.exports = {
 
     return config
   },
+
   // Add this configuration to set the pages directory
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
@@ -22,6 +23,7 @@ module.exports = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, 'src'),
     }
+    
     return config
   },
 }

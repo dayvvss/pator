@@ -24,6 +24,7 @@ const LinkedInLoginCard = () => {
 
   const clientId = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID
   const redirectUri = process.env.NEXT_PUBLIC_LINKEDIN_REDIRECT_URI
+  const client_secret = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET
 
   const sendLinkedInAuthCode = async (authCode) => {
     try {
@@ -58,6 +59,7 @@ const LinkedInLoginCard = () => {
     if (urlParams.has('code')) {
       setConnectedCard('connected-card')
       const authCode = urlParams.get('code')
+      console.log(authCode)
       
       const handleLinkedInCallback = async () => {
         setLoading(true)

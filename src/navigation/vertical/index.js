@@ -61,6 +61,11 @@ const navigation = () => {
       title: 'Account Settings',
       icon: AccountCogOutline,
       path: '/account-settings'
+    },
+    {
+      title: 'Billing',
+      icon: CreditCardOutline,
+      path: '/account-settings#billing'
     }
   ]
 }

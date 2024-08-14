@@ -14,11 +14,13 @@ import MuiTab from '@mui/material/Tab'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 import LockOpenOutline from 'mdi-material-ui/LockOpenOutline'
 import InformationOutline from 'mdi-material-ui/InformationOutline'
+import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
 
 // ** Demo Tabs Imports
 import TabInfo from 'src/views/account-settings/TabInfo'
 import TabAccount from 'src/views/account-settings/TabAccount'
 import TabSecurity from 'src/views/account-settings/TabSecurity'
+import TabBilling from 'src/views/account-settings/TabBilling'
 
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
@@ -84,6 +86,15 @@ const AccountSettings = () => {
               </Box>
             }
           />
+          <Tab
+            value='billing'
+            label={
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <CreditCardOutline />
+                <TabName>Billing</TabName>
+              </Box>
+            }
+          />
         </TabList>
 
         <TabPanel sx={{ p: 0 }} value='account'>
@@ -94,6 +105,9 @@ const AccountSettings = () => {
         </TabPanel>
         <TabPanel sx={{ p: 0 }} value='info'>
           <TabInfo />
+        </TabPanel>
+        <TabPanel sx={{ p: 0 }} value='billing'>
+          <TabBilling />
         </TabPanel>
       </TabContext>
     </Card>
