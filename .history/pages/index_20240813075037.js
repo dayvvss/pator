@@ -45,22 +45,22 @@ const Dashboard = () => {
           <Grid container spacing={6}>
             <Grid item xs={6}>
               <CardStatisticsVerticalComponent
-                stats='25.6k'
+                stats='$25.6k'
                 icon={<Facebook />}
                 color='info'
                 trendNumber='+42%'
                 title='Facebook Page'
-                subtitle='Weekly followers'
+                subtitle='Weekly Profit'
               />
             </Grid>
             <Grid item xs={6}>
               <CardStatisticsVerticalComponent
-                stats='78'
+                stats='$78'
                 title='LInkedIn'
                 trend='negative'
                 color='info'
                 trendNumber='-15%'
-                subtitle='Weekly followers'
+                subtitle='Past Month'
                 icon={<Linkedin />}
               />
             </Grid>
@@ -70,7 +70,7 @@ const Dashboard = () => {
                 trend='negative'
                 trendNumber='-18%'
                 title='Instagram'
-                subtitle='Weekly followers'
+                subtitle='Yearly Project'
                 icon={<Instagram />}
               />
             </Grid>
@@ -80,7 +80,7 @@ const Dashboard = () => {
                 color='warning'
                 trend='negative'
                 trendNumber='-18%'
-                subtitle='Weekly followers'
+                subtitle='Last Week'
                 title='Tiktok'
                 icon={<HelpCircleOutline />}
               />
