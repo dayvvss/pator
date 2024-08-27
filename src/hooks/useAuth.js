@@ -1,19 +1,34 @@
 import { useState, useEffect } from 'react';
 
 export const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is authenticated
     const checkAuth = () => {
       const token = localStorage.getItem('token');
-      setIsAuthenticated(!!token);
+      if (token) {
+        // Here you would typically verify the token with your backend
+        // For now, we'll just set a user object if a token exists
+        setUser({ token });
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     };
 
     checkAuth();
   }, []);
 
-  return { isAuthenticated, loading };
+  const login = (token) => {
+    localStorage.setItem('token', token);
+    setUser({ token });
+  };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+  };
+
+  return { user, loading, login, logout };
 };

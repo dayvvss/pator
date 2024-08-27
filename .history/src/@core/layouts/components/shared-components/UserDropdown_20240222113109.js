@@ -45,13 +45,10 @@ const UserDropdown = () => {
 
   const handleDropdownClose = url => {
     if (url) {
-      localStorage.removeItem('token');
       router.push(url)
-      
     }
     setAnchorEl(null)
   }
-  
 
   const styles = {
     py: 2,

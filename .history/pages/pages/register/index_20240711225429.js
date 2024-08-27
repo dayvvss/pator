@@ -3,7 +3,6 @@ import { useState, Fragment } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 // ** MUI Components
 import Box from '@mui/material/Box'
@@ -29,9 +28,6 @@ import Twitter from 'mdi-material-ui/Twitter'
 import Facebook from 'mdi-material-ui/Facebook'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
-
-// ** API Import
-import api, { endpoints } from 'src/config/api'
 
 // ** Configs
 import themeConfig from 'src/configs/themeConfig'
@@ -65,15 +61,12 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 const RegisterPage = () => {
   // ** States
   const [values, setValues] = useState({
-    username: '',
-    email: '',
     password: '',
     showPassword: false
   })
 
   // ** Hook
   const theme = useTheme()
-  const router = useRouter()
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -85,25 +78,6 @@ const RegisterPage = () => {
 
   const handleMouseDownPassword = event => {
     event.preventDefault()
-  }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    try {
-      const response = await api.post(endpoints.register, {
-        username: values.username,
-        email: values.email,
-        password: values.password
-      })
-      console.log('Registration successful:', response.data)
-
-      // Redirect to login page or dashboard
-      router.push('/pages/login')
-    } catch (error) {
-      console.error('Registration failed:', error)
-      
-      // Handle error (e.g., show error message to user)
-    }
   }
 
   return (
@@ -189,24 +163,9 @@ const RegisterPage = () => {
             </Typography>
             <Typography variant='body2'>Make your social media management easy and fun!</Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
-            <TextField
-              autoFocus
-              fullWidth
-              id='username'
-              label='Username'
-              sx={{ marginBottom: 4 }}
-              value={values.username}
-              onChange={handleChange('username')}
-            />
-            <TextField
-              fullWidth
-              type='email'
-              label='Email'
-              sx={{ marginBottom: 4 }}
-              value={values.email}
-              onChange={handleChange('email')}
-            />
+          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
+            <TextField autoFocus fullWidth id='username' label='Username' sx={{ marginBottom: 4 }} />
+            <TextField fullWidth type='email' label='Email' sx={{ marginBottom: 4 }} />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-register-password'>Password</InputLabel>
               <OutlinedInput
@@ -285,8 +244,6 @@ const RegisterPage = () => {
     </Box>
   )
 }
-
 RegisterPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
-RegisterPage.authPage = true
 
 export default RegisterPage

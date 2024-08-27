@@ -1,24 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from 'src/hooks/useAuth';
 
 const withAuth = (WrappedComponent) => {
   return (props) => {
     const router = useRouter();
-    const { isAuthenticated, loading } = useAuth();
+    const { user, loading } = useAuth();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-      if (!loading && !isAuthenticated) {
-        router.replace('/pages/login');
+      if (!loading) {
+        if (!user) {
+          const publicPages = ['/pages/login', '/pages/register', '/404', '/500'];
+          if (!publicPages.includes(router.pathname)) {
+            router.replace('/pages/login');
+          }
+        }
+        setIsLoading(false);
       }
-    }, [isAuthenticated, loading, router]);
+    }, [user, loading, router]);
 
-    if (loading) {
-      return <div>Loading...</div>;
-    }
-
-    if (!isAuthenticated) {
-      return null;
+    if (isLoading) {
+      return <div>Loading...</div>; // You can replace this with a proper loading component
     }
 
     return <WrappedComponent {...props} />;

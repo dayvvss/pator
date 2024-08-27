@@ -285,8 +285,6 @@ const RegisterPage = () => {
     </Box>
   )
 }
-
 RegisterPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
-RegisterPage.authPage = true
 
 export default RegisterPage

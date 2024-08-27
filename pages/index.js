@@ -25,8 +25,8 @@ import WeeklyOverview from 'src/views/dashboard/WeeklyOverview'
 import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
 import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 
-// ** Auth HOC Import
-// import withAuth from 'src/components/auth/withAuth'
+// ** Server Side Authentication
+import { withAuthServerSideProps } from 'src/utils/auth'
 
 const Dashboard = () => {
   return (
@@ -101,5 +101,6 @@ const Dashboard = () => {
   )
 }
 
-// export default withAuth(Dashboard)
+export const getServerSideProps = withAuthServerSideProps()
+
 export default Dashboard

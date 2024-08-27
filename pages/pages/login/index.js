@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -75,6 +75,14 @@ const LoginPage = () => {
   const theme = useTheme()
   const router = useRouter()
 
+  useEffect(() => {
+    // Check if user is already logged in
+    const token = localStorage.getItem('token')
+    if (token) {
+      router.replace('/pages/createpost')
+    }
+  }, [router])
+
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
   }
@@ -100,7 +108,9 @@ const LoginPage = () => {
       // Handle successful login
       console.log('Login successful:', response.data)
       localStorage.setItem('token', response.data.token)
-      router.push('/') // Redirect to home page or dashboard
+      
+      // Use window.location for a full page reload
+      window.location.href = '/pages/createpost'
     } catch (error) {
       // Handle login error
       console.error('Login failed:', error)
@@ -284,6 +294,8 @@ const LoginPage = () => {
     </Box>
   )
 }
+
 LoginPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
+LoginPage.authPage = true
 
 export default LoginPage

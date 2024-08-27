@@ -27,6 +27,12 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 // ** Global css styles
 import '../styles/globals.css'
 
+// ** Auth HOC
+import withAuth from 'src/components/auth/withAuth'
+
+// ** React Imports
+import { useState, useEffect } from 'react'
+
 const clientSideEmotionCache = createEmotionCache()
 
 // ** Pace Loader
@@ -45,9 +51,21 @@ if (themeConfig.routingLoader) {
 // ** Configure JSS & ClassName
 const App = props => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(false)
+  }, [])
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
+
+  // Apply withAuth HOC to all pages except login, register, and error pages
+  const AuthenticatedComponent = Component.authPage ? Component : withAuth(Component)
+
+  if (loading) {
+    return <div>Loading...</div> // You can replace this with a proper loading component
+  }
 
   return (
     <CacheProvider value={emotionCache}>
@@ -64,7 +82,7 @@ const App = props => {
       <SettingsProvider>
         <SettingsConsumer>
           {({ settings }) => {
-            return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
+            return <ThemeComponent settings={settings}>{getLayout(<AuthenticatedComponent {...pageProps} />)}</ThemeComponent>
           }}
         </SettingsConsumer>
       </SettingsProvider>

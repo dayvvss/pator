@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import { useState } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -11,8 +11,8 @@ import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
 import InputLabel from '@mui/material/InputLabel'
+import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
@@ -21,6 +21,7 @@ import { styled, useTheme } from '@mui/material/styles'
 import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
+import Alert from '@mui/material/Alert'
 
 // ** Icons Imports
 import Google from 'mdi-material-ui/Google'
@@ -30,9 +31,6 @@ import Facebook from 'mdi-material-ui/Facebook'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
-// ** API Import
-import api, { endpoints } from 'src/config/api'
-
 // ** Configs
 import themeConfig from 'src/configs/themeConfig'
 
@@ -41,6 +39,9 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
+
+// ** API Import
+import api, { endpoints } from 'src/config/api'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -54,22 +55,21 @@ const LinkStyled = styled('a')(({ theme }) => ({
 }))
 
 const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
-  marginTop: theme.spacing(1.5),
-  marginBottom: theme.spacing(4),
   '& .MuiFormControlLabel-label': {
     fontSize: '0.875rem',
     color: theme.palette.text.secondary
   }
 }))
 
-const RegisterPage = () => {
-  // ** States
+const LoginPage = () => {
+  // ** State
   const [values, setValues] = useState({
-    username: '',
     email: '',
     password: '',
     showPassword: false
   })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   // ** Hook
   const theme = useTheme()
@@ -87,22 +87,26 @@ const RegisterPage = () => {
     event.preventDefault()
   }
 
-  const handleSubmit = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault()
+    setError('')
+    setLoading(true)
     try {
-      const response = await api.post(endpoints.register, {
-        username: values.username,
+      const response = await api.post(endpoints.login, {
         email: values.email,
         password: values.password
       })
-      console.log('Registration successful:', response.data)
-
-      // Redirect to login page or dashboard
-      router.push('/pages/login')
-    } catch (error) {
-      console.error('Registration failed:', error)
       
-      // Handle error (e.g., show error message to user)
+      // Handle successful login
+      console.log('Login successful:', response.data)
+      localStorage.setItem('token', response.data.token)
+      router.push('/', undefined, { replace: true }) // Redirect to home page and replace the current history entry
+    } catch (error) {
+      // Handle login error
+      console.error('Login failed:', error)
+      setError(error.response?.data?.detail || 'Login failed. Please check your credentials and try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -185,34 +189,31 @@ const RegisterPage = () => {
           </Box>
           <Box sx={{ mb: 6 }}>
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
-              Adventure starts here 🚀
+              Welcome to {themeConfig.templateName}! 👋🏻
             </Typography>
-            <Typography variant='body2'>Make your social media management easy and fun!</Typography>
+            <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+          {error && (
+            <Alert severity="error" sx={{ mb: 4 }}>
+              {error}
+            </Alert>
+          )}
+          <form noValidate autoComplete='off' onSubmit={handleLogin}>
             <TextField
               autoFocus
               fullWidth
-              id='username'
-              label='Username'
-              sx={{ marginBottom: 4 }}
-              value={values.username}
-              onChange={handleChange('username')}
-            />
-            <TextField
-              fullWidth
-              type='email'
+              id='email'
               label='Email'
               sx={{ marginBottom: 4 }}
               value={values.email}
               onChange={handleChange('email')}
             />
             <FormControl fullWidth>
-              <InputLabel htmlFor='auth-register-password'>Password</InputLabel>
+              <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
                 label='Password'
                 value={values.password}
-                id='auth-register-password'
+                id='auth-login-password'
                 onChange={handleChange('password')}
                 type={values.showPassword ? 'text' : 'password'}
                 endAdornment={
@@ -223,33 +224,37 @@ const RegisterPage = () => {
                       onMouseDown={handleMouseDownPassword}
                       aria-label='toggle password visibility'
                     >
-                      {values.showPassword ? <EyeOutline fontSize='small' /> : <EyeOffOutline fontSize='small' />}
+                      {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
                     </IconButton>
                   </InputAdornment>
                 }
               />
             </FormControl>
-            <FormControlLabel
-              control={<Checkbox />}
-              label={
-                <Fragment>
-                  <span>I agree to </span>
-                  <Link href='/' passHref>
-                    <LinkStyled onClick={e => e.preventDefault()}>privacy policy & terms</LinkStyled>
-                  </Link>
-                </Fragment>
-              }
-            />
-            <Button fullWidth size='large' type='submit' variant='contained' sx={{ marginBottom: 7 }}>
-              Sign up
+            <Box
+              sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
+            >
+              <FormControlLabel control={<Checkbox />} label='Remember Me' />
+              <Link passHref href='/'>
+                <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
+              </Link>
+            </Box>
+            <Button
+              fullWidth
+              size='large'
+              type='submit'
+              variant='contained'
+              sx={{ marginBottom: 7 }}
+              disabled={loading}
+            >
+              {loading ? 'Logging in...' : 'Login'}
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
               <Typography variant='body2' sx={{ marginRight: 2 }}>
-                Already have an account?
+                New on our platform?
               </Typography>
               <Typography variant='body2'>
-                <Link passHref href='/pages/login'>
-                  <LinkStyled>Sign in instead</LinkStyled>
+                <Link passHref href='/pages/register'>
+                  <LinkStyled>Create an account</LinkStyled>
                 </Link>
               </Typography>
             </Box>
@@ -265,13 +270,7 @@ const RegisterPage = () => {
                   <Twitter sx={{ color: '#1da1f2' }} />
                 </IconButton>
               </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Github
-                    sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
-                  />
-                </IconButton>
-              </Link>
+            
               <Link href='/' passHref>
                 <IconButton component='a' onClick={e => e.preventDefault()}>
                   <Google sx={{ color: '#db4437' }} />
@@ -286,7 +285,7 @@ const RegisterPage = () => {
   )
 }
 
-RegisterPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
-RegisterPage.authPage = true
+LoginPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
+LoginPage.authPage = true
 
-export default RegisterPage
+export default LoginPage
