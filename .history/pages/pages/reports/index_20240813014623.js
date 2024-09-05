@@ -11,7 +11,7 @@ const ReportsPage = () => {
               Reports
             </Typography>
             <Typography variant="body2">
-              This is the Reports page. Add your reports content here
+              This is the Reports page. Add your reports content here.
             </Typography>
           </CardContent>
         </Card>
@@ -20,9 +20,4 @@ const ReportsPage = () => {
   )
 }
 
-export default ReportsPage   
-
-
-
-
-
+export default ReportsPage

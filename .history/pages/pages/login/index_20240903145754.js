@@ -81,7 +81,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.replace('/dashboard')
+      router.replace('/pages/createpost')
     }
   }, [user, router])
 

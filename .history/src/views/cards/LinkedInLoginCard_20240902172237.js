@@ -44,7 +44,7 @@ const LinkedInLoginCard = () => {
         { "code": authCode },
         {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
             'Content-Type': 'application/json'
           }
         }
@@ -68,7 +68,7 @@ const LinkedInLoginCard = () => {
       const handleLinkedInCallback = async () => {
         setLoading(true)
         try {
-          const response = await sendAuthCodeToBackend(authCode)
+          const response = await sendLinkedInAuthCode(authCode)
           console.log('LinkedIn connected successfully:', response.data)
           
           // Send the auth code to the backend
@@ -76,7 +76,6 @@ const LinkedInLoginCard = () => {
           console.log('Backend response:', backendResponse)
           
           setIsConnected(true)
-
           // Handle successful connection (e.g., update UI, store in context)
         } catch (error) {
           console.error('Error connecting LinkedIn:', error)

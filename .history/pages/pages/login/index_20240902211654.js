@@ -81,7 +81,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.replace('/dashboard')
+      router.replace('/pages/createpost')
     }
   }, [user, router])
 
@@ -109,8 +109,8 @@ const LoginPage = () => {
       
       // Handle successful login
       console.log('Login successful:', response.data.token.access)
-      login(response.data.token.access)
-      router.replace('/dashboard')
+      login(response.data.token)
+      router.replace('/')
     } catch (error) {
       // Handle login error
       console.error('Login failed:', error)

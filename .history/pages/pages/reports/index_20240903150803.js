@@ -20,9 +20,4 @@ const ReportsPage = () => {
   )
 }
 
-export default ReportsPage   
-
-
-
-
-
+export default ReportsPage

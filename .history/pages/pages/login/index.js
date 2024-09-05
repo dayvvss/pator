@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -43,9 +43,6 @@ import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 // ** API Import
 import api, { endpoints } from 'src/config/api'
 
-// ** Auth Hook
-import { useAuth } from 'src/hooks/useAuth'
-
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '28rem' }
@@ -77,13 +74,6 @@ const LoginPage = () => {
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
-  const { user, login } = useAuth()
-
-  useEffect(() => {
-    if (user) {
-      router.replace('/dashboard')
-    }
-  }, [user, router])
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -108,9 +98,14 @@ const LoginPage = () => {
       })
       
       // Handle successful login
-      console.log('Login successful:', response.data.token.access)
-      login(response.data.token.access)
-      router.replace('/dashboard')
+      // console.log('Login successful:', response.data)
+
+      localStorage.setItem('token', response.data.token.access)
+      localStorage.setItem('refresh-token', response.data.token.refresh)
+
+      console.log('test', response.data.token.access); // Should log "string"
+
+      router.push('/') // Redirect to home page and replace the current history entry
     } catch (error) {
       // Handle login error
       console.error('Login failed:', error)
@@ -118,10 +113,6 @@ const LoginPage = () => {
     } finally {
       setLoading(false)
     }
-  }
-
-  if (user) {
-    return null // or a loading component
   }
 
   return (
@@ -205,7 +196,7 @@ const LoginPage = () => {
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
               Welcome to {themeConfig.templateName}! 👋🏻
             </Typography>
-            <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
+            <Typography variant='body2'>Please sign-in to your account and start the adventur</Typography>
           </Box>
           {error && (
             <Alert severity="error" sx={{ mb: 4 }}>

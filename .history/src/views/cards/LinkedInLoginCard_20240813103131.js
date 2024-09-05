@@ -1,8 +1,6 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
 
-import api, { endpoints } from 'src/config/api'
-
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -28,34 +26,32 @@ const LinkedInLoginCard = () => {
   const redirectUri = process.env.NEXT_PUBLIC_LINKEDIN_REDIRECT_URI
   const client_secret = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET
 
-  // const sendLinkedInAuthCode = async (authCode) => {
-  //   try {
-  //     const response = await axios.get(`/api/linkedin/callback?code=${authCode}`)
-  //     return response
-  //   } catch (error) {
-  //     console.error('Error sending LinkedIn auth code:', error)
-  //     throw error
-  //   }
-  // }
+  const sendLinkedInAuthCode = async (authCode) => {
+    try {
+      const response = await axios.get(`/api/linkedin/callback?code=${authCode}`)
+      return response
+    } catch (error) {
+      console.error('Error sending LinkedIn auth code:', error)
+      throw error
+    }
+  }
 
   const sendAuthCodeToBackend = async (authCode) => {
     try {
-      const response = await api.post(endpoints.linkedinCallback, 
-        { "code": authCode },
+      const response = await axios.post('/linkedIn/auth-code/', 
+        { auth_code: authCode },
         {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
             'Content-Type': 'application/json'
           }
         }
       )
       return response.data
-      } 
-      catch (error) 
-      {
+    } catch (error) {
       console.error('Error sending auth code to backend:', error)
       throw error
-      }
+    }
   }
 
   useEffect(() => {
@@ -68,7 +64,7 @@ const LinkedInLoginCard = () => {
       const handleLinkedInCallback = async () => {
         setLoading(true)
         try {
-          const response = await sendAuthCodeToBackend(authCode)
+          const response = await sendLinkedInAuthCode(authCode)
           console.log('LinkedIn connected successfully:', response.data)
           
           // Send the auth code to the backend
@@ -76,7 +72,6 @@ const LinkedInLoginCard = () => {
           console.log('Backend response:', backendResponse)
           
           setIsConnected(true)
-
           // Handle successful connection (e.g., update UI, store in context)
         } catch (error) {
           console.error('Error connecting LinkedIn:', error)

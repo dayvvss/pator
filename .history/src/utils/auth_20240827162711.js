@@ -10,7 +10,6 @@ export const isAuthenticated = (ctx) => {
 
   try {
     verify(token, process.env.JWT_SECRET);
-    
     return true;
   } catch (error) {
     return false;

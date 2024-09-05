@@ -25,8 +25,8 @@ import WeeklyOverview from 'src/views/dashboard/WeeklyOverview'
 import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
 import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 
-// ** Auth HOC Import
-// import withAuth from 'src/components/auth/withAuth'
+// ** Server Side Authentication
+import { withAuthServerSideProps } from 'src/utils/auth'
 
 const Dashboard = () => {
   return (
@@ -60,7 +60,7 @@ const Dashboard = () => {
                 trend='negative'
                 color='info'
                 trendNumber='-15%'
-                subtitle='Past Month'
+                subtitle='Weekly followers'
                 icon={<Linkedin />}
               />
             </Grid>
@@ -70,7 +70,7 @@ const Dashboard = () => {
                 trend='negative'
                 trendNumber='-18%'
                 title='Instagram'
-                subtitle='Yearly Project'
+                subtitle='Weekly followers'
                 icon={<Instagram />}
               />
             </Grid>
@@ -80,7 +80,7 @@ const Dashboard = () => {
                 color='warning'
                 trend='negative'
                 trendNumber='-18%'
-                subtitle='Last Week'
+                subtitle='Weekly followers'
                 title='Tiktok'
                 icon={<HelpCircleOutline />}
               />
@@ -101,5 +101,6 @@ const Dashboard = () => {
   )
 }
 
-// export default withAuth(Dashboard)
+// export const getServerSideProps = withAuthServerSideProps()
+
 export default Dashboard

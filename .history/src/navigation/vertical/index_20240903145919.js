@@ -19,7 +19,7 @@ const navigation = () => {
     {
       title: 'Dashboard',
       icon: HomeOutline,
-      path: '/dashboard'
+      path: '/pages/dashboard'
     },
   
     {
