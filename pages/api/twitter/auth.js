@@ -14,6 +14,7 @@ export default function handler(req, res) {
   oauth.getOAuthRequestToken((error, oauthToken, oauthTokenSecret, results) => {
     if (error) {
       console.error('Error getting OAuth request token:', error);
+      
       return res.status(500).json({ error: 'Failed to get OAuth request token' });
     }
 

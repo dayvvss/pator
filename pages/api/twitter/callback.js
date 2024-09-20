@@ -27,6 +27,7 @@ export default function handler(req, res) {
     (error, oauthAccessToken, oauthAccessTokenSecret, results) => {
       if (error) {
         console.error('Error getting OAuth access token:', error);
+        
         return res.status(500).json({ error: 'Failed to get OAuth access token' });
       }
 
