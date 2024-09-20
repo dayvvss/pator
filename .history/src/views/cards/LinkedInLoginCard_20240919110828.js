@@ -14,7 +14,7 @@ import Chip from '@mui/material/Chip'
 
 // ** Icon Imports
 import LinkedInIcon from 'mdi-material-ui/Linkedin'
-import LinkedInLogo from 'public/images/logos/LinkedIn.png'
+import LinkedInLogo from './images/logos/LinkedIn.png'
 
 // ** Third Party Imports
 import axios from 'axios'
@@ -50,7 +50,6 @@ const LinkedInLoginCard = () => {
           }
         }
       )
-      
       return response.data
       } 
       catch (error) 
@@ -96,7 +95,6 @@ const LinkedInLoginCard = () => {
   const handleLinkedInLogin = () => {
     if (!clientId || !redirectUri) {
       setError('LinkedIn configuration is not properly set up.')
-
       return
     }
 
@@ -106,25 +104,14 @@ const LinkedInLoginCard = () => {
   }
 
   return (
-    <Card 
-      onClick={handleLinkedInLogin}
-      sx={{ 
-        cursor: 'pointer', 
-        width: 200,
-        opacity: loading ? 0.7 : 1,
-        transition: 'opacity 0.3s',
-        position: 'relative',
-        '&:hover': {
-          boxShadow: 4, // Use theme shadow
-        },
-      }}
-    >
+    <Card sx={{ cursor: 'pointer',width:200 }} className={connectedCard} onClick={handleLinkedInLogin} >
+      
       <CardContent>
         <Box sx={{ my: 4, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
           <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', '& svg': { mr: 1, color: '#0A66C2' } }}>
             {/* <LinkedInIcon /> */}
-            <img src='/images/logos/LinkedIn.png' alt="LinkedIn" style={{ width: 34, height: 34, marginLeft: 8 }} />
-            <Typography sx={{ color: '#0A66C2', fontWeight: 600, fontSize: '1rem' }}>LinkedIn</Typography>
+            <img src={LinkedInLogo} alt="LinkedIn" style={{ width: 24, height: 24, marginLeft: 8 }} />
+            <Typography sx={{ color: '#0A66C2', fontWeight: 600, fontSize: '0.875rem' }}>LinkedIn</Typography>
           </Box>
         </Box>
         <Box sx={{ gap: 2, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>

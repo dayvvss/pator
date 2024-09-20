@@ -49,12 +49,6 @@ const navigation = () => {
       path: '/pages/reports',
       openInNewTab: true
     },
-    {
-      title: 'Content Calendar',
-      icon: CalendarMonth,
-      path: '/content-calendar'
-    },
-    
     
     // {
     //   title: 'Error',

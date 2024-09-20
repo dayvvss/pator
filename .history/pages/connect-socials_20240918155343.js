@@ -3,9 +3,6 @@ import { Grid, Typography } from '@mui/material';
 import TwitterLoginCard from 'src/views/cards/TwitterLoginCard';
 import LinkedInLoginCard from 'src/views/cards/LinkedInLoginCard';
 import TiktokLoginCard from 'src/views/cards/TiktokLoginCard';
-import YouTubeLoginCard from 'src/views/cards/YouTubeLoginCard';
-import FacebookLoginCard from 'src/views/cards/FacebookLoginCard';
-import InstagramLoginCard from 'src/views/cards/InstagramLoginCard';
 import { useRouter } from 'next/router';
 
 const ConnectSocials = () => {
@@ -23,27 +20,18 @@ const ConnectSocials = () => {
   }, [router]);
 
   return (
-    <Grid container spacing={6}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography variant="h5">Connect Social Media Accounts</Typography>
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={6}>
         <TwitterLoginCard />
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={6}>
         <LinkedInLoginCard />
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={6}>
         <TiktokLoginCard />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <YouTubeLoginCard />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <FacebookLoginCard />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <InstagramLoginCard />
       </Grid>
     </Grid>
   );

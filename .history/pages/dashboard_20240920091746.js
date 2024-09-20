@@ -45,7 +45,7 @@ const Dashboard = () => {
           <Grid container spacing={6}>
             <Grid item xs={6}>
               <CardStatisticsVerticalComponent
-                stats='25.5k'
+                stats='25.6k'
                 icon={<Facebook />}
                 color='info'
                 trendNumber='+43%'

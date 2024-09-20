@@ -106,19 +106,8 @@ const LinkedInLoginCard = () => {
   }
 
   return (
-    <Card 
-      onClick={handleLinkedInLogin}
-      sx={{ 
-        cursor: 'pointer', 
-        width: 200,
-        opacity: loading ? 0.7 : 1,
-        transition: 'opacity 0.3s',
-        position: 'relative',
-        '&:hover': {
-          boxShadow: 4, // Use theme shadow
-        },
-      }}
-    >
+    <Card sx={{ cursor: 'pointer',width:200 }} className={connectedCard} onClick={handleLinkedInLogin} >
+      
       <CardContent>
         <Box sx={{ my: 4, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
           <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', '& svg': { mr: 1, color: '#0A66C2' } }}>

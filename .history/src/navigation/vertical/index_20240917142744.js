@@ -13,13 +13,14 @@ import PencilOutline from 'mdi-material-ui/PencilOutline'
 import Compass from 'mdi-material-ui/CompassOutline'
 import ChartBar from 'mdi-material-ui/ChartBar'
 import AccountGroup from 'mdi-material-ui/AccountGroup'
+import CalendarMonth from 'mdi-material-ui/CalendarMonth'
 
 const navigation = () => {
   return [
     {
       title: 'Dashboard',
       icon: HomeOutline,
-      path: '/'
+      path: '/dashboard'
     },
   
     {
@@ -48,6 +49,12 @@ const navigation = () => {
       path: '/pages/reports',
       openInNewTab: true
     },
+    {
+      title: 'Content Calendar',
+      icon: CalendarMonth,
+      path: '/content-calendar'
+    },
+    
     
     // {
     //   title: 'Error',

@@ -101,6 +101,6 @@ const Dashboard = () => {
   )
 }
 
-// export const getServerSideProps = withAuthServerSideProps()
+export const getServerSideProps = withAuthServerSideProps()
 
 export default Dashboard

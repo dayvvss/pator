@@ -23,26 +23,26 @@ const ConnectSocials = () => {
   }, [router]);
 
   return (
-    <Grid container spacing={6}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography variant="h5">Connect Social Media Accounts</Typography>
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={2}>
         <TwitterLoginCard />
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={2}>
         <LinkedInLoginCard />
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={2}>
         <TiktokLoginCard />
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={2}>
         <YouTubeLoginCard />
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={2}>
         <FacebookLoginCard />
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} md={2}>
         <InstagramLoginCard />
       </Grid>
     </Grid>

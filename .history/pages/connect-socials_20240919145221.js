@@ -23,7 +23,7 @@ const ConnectSocials = () => {
   }, [router]);
 
   return (
-    <Grid container spacing={6}>
+    <Grid container spacing={3}>
       <Grid item xs={12}>
         <Typography variant="h5">Connect Social Media Accounts</Typography>
       </Grid>

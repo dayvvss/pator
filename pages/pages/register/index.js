@@ -101,7 +101,7 @@ const RegisterPage = () => {
       router.push('/pages/login')
     } catch (error) {
       console.error('Registration failed:', error)
-      
+
       // Handle error (e.g., show error message to user)
     }
   }
