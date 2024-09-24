@@ -1,11 +1,11 @@
 {
-  "name": "materio-mui-react-nextjs-admin-template-free",
-  "description": "Most Powerful & Comprehensive Free MUI React NextJS Admin Dashboard Template built for developers! 🚀",
+  "name": "Pator",
+  "description": "Pator is a social media management tool that allows you to manage your social media accounts in one place.",
   "license": "MIT",
   "version": "1.0.0",
   "author": {
-    "name": "ThemeSelection",
-    "url": "https://themeselection.com/"
+    "name": "Pator",
+    "url": "https://pator.com/"
   },
   "bugs": {
     "url": "https://github.com/themeselection/materio-mui-react-nextjs-admin-template-free/issues"
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "https://github.com/themeselection/materio-mui-react-nextjs-admin-template-free.git"
   },
-  "homepage": "https://themeselection.com/products/materio-free-mui-react-nextjs-admin-template/",
+  "homepage": "https://pator.net/",
   "keywords": [
     "react",
     "javascript",
@@ -49,6 +49,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.6.0",
+    "@kinde-oss/kinde-auth-nextjs": "^2.3.8",
     "@mui/lab": "^5.0.0-alpha.70",
     "@mui/material": "^5.4.3",
     "@popperjs/core": "^2.11.2",
@@ -60,15 +61,17 @@
     "cookie": "^0.6.0",
     "eslint-plugin-react": "^7.29.4",
     "jsonwebtoken": "^9.0.2",
+    "latest": "^0.2.0",
     "mdi-material-ui": "^7.1.0",
-    "next": "12.0.4",
+    "n": "^10.0.0",
+    "next": "^14.2.13",
     "nprogress": "^0.2.0",
     "oauth": "^0.10.0",
     "payment": "^2.4.7",
-    "react": "17.0.2",
+    "react": "^18.3.1",
     "react-apexcharts": "^1.4.1",
     "react-datepicker": "^4.5.0",
-    "react-dom": "17.0.2",
+    "react-dom": "^18.3.1",
     "react-dropzone": "^14.2.3",
     "react-perfect-scrollbar": "^1.5.8",
     "react-popper": "^2.2.5"

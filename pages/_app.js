@@ -70,7 +70,7 @@ const App = props => {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>{`${themeConfig.templateName} - Pater`}</title>
+        <title>{`${themeConfig.templateName} - Pator`}</title>
         <meta
           name='description'
           content={`${themeConfig.templateName} post automater and social media manager`}

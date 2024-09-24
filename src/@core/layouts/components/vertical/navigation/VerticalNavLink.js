@@ -28,6 +28,7 @@ const MenuNavLink = styled(ListItemButton)(({ theme }) => ({
   color: theme.palette.text.primary,
   padding: theme.spacing(2.25, 3.5),
   transition: 'opacity .25s ease-in-out',
+  textDecoration: 'none', // Ensure this line is present
   '&.active, &.active:hover': {
     boxShadow: theme.shadows[3],
     backgroundImage: `linear-gradient(98deg, ${theme.palette.customColors.primaryGradient}, ${theme.palette.primary.main} 94%)`
@@ -64,7 +65,7 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }) => {
       disablePadding
       className='nav-link'
       disabled={item.disabled || false}
-      sx={{ mt: 1.5, px: '0 !important' }}
+      sx={{ mt: 1.5, px: '0 !important', textDecoration: 'none' }} // Ensure this line is present
     >
       <Link passHref href={item.path === undefined ? '/' : `${item.path}`}>
         <MenuNavLink

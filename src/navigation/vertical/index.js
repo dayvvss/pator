@@ -40,7 +40,7 @@ const navigation = () => {
     {
       title: 'Discover',
       icon: Compass,
-      path: '/pages/register',
+      path: '/pages/discover',
       openInNewTab: true
     },
     {
@@ -52,7 +52,7 @@ const navigation = () => {
     {
       title: 'Content Calendar',
       icon: CalendarMonth,
-      path: '/content-calendar'
+      path: '/pages/calendar'
     },
     
     

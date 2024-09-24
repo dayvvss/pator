@@ -27,6 +27,7 @@ function FileUploader({ onFileUpload, onFileRemove }) {
     } else if (file.type.startsWith('video/')) {
       return 'video';
     }
+    
     return null;
   };
 

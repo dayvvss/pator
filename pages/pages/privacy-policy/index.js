@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
       >
         <h1>Privacy Policy</h1>
         <p>
-          Welcome to PATER! This Privacy Policy explains how we collect, use, and protect your personal information when
+          Welcome to PATOR! This Privacy Policy explains how we collect, use, and protect your personal information when
           you use our Social Media Post Automator platform.
         </p>
 

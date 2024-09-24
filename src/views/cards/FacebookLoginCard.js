@@ -37,6 +37,7 @@ const FacebookLoginCard = () => {
     setError(null);
     try {
       await api.post('/api/facebook/access-token', { code, state });
+      
       // Handle successful login (e.g., update UI, store user info)
     } catch (err) {
       setError('Failed to complete Facebook login. Please try again.');
