@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Calendar.css';  // Create a CSS file for styling
 import TableStickyHeader from 'src/views/tables/TableStickyHeader'
 import CalenderStickyHeader from 'src/views/tables/CalenderStickyHeader'
 
@@ -51,7 +50,7 @@ const Calendar = () => {
    
       <CalenderStickyHeader/>
     </div>
-    
+
   //   <div className="calendar">
   //     {renderCalendar()}
   //   </div>
