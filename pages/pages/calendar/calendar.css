@@ -1,0 +1,59 @@
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  
+  .calendarDay {
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative;
+    width: 100px;  /* {{ edit_1 }} */
+    height: 100px; /* {{ edit_2 }} */
+  }
+  
+  .date {
+    font-weight: bold;
+  }
+  
+  .events {
+    margin-top: 10px;
+  }
+  
+  .event {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+  }
+  
+  .Development {
+    background-color: orange;
+  }
+  
+  .Design {
+    background-color: lightblue;
+  }
+  
+  .Editfile {
+    background-color: red;
+  }
+  
+  .Notetaking {
+    background-color: gray;
+  }
+  
+  .GreenTag {
+    background-color: green;
+  }
+  
+  .BlueTag {
+    background-color: blue;
+  }
+  
+  .RegularTag {
+    background-color: lightgray;
+  }
+  
+  .OrangeTag {
+    background-color: orange;
+  }
