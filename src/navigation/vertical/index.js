@@ -29,7 +29,7 @@ const navigation = () => {
     {
       title: 'Create Post',
       icon: PencilOutline,
-      path: '/pages/createpost',
+      path: '/createpost',
       openInNewTab: true
     },
     {
@@ -40,19 +40,19 @@ const navigation = () => {
     {
       title: 'Discover',
       icon: Compass,
-      path: '/pages/discover',
+      path: '/discover',
       openInNewTab: true
     },
     {
       title: 'Reports',
       icon: ChartBar,
-      path: '/pages/reports',
+      path: '/reports',
       openInNewTab: true
     },
     {
       title: 'Content Calendar',
       icon: CalendarMonth,
-      path: '/pages/calendar'
+      path: '/calendar'
     },
     
     
