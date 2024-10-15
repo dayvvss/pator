@@ -24,7 +24,7 @@ export const withAuthServerSideProps = (getServerSidePropsFunc) => {
     if (!isAuth) {
       return {
         redirect: {
-          destination: '/pages/login',
+          destination: '/login',
           permanent: false,
         },
       };
