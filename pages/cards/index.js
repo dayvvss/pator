@@ -44,7 +44,7 @@ const CardBasic = () => {
         <CardAppleWatch />
       </Grid>
       <Grid item xs={12} md={8}>
-        <CardMembership />
+        {/* <CardMembership /> */}
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <CardInfluencer />

@@ -28,10 +28,13 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import '../styles/globals.css'
 
 // ** Auth HOC
-import withAuth from 'src/components/auth/withAuth'
+// import withAuth from 'src/components/auth/withAuth'
 
 // ** React Imports
 import { useState, useEffect } from 'react'
+
+// ** Kinde import
+import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -61,7 +64,7 @@ const App = props => {
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
 
   // Apply withAuth HOC to all pages except login, register, and error pages
-  const AuthenticatedComponent = Component.authPage ? Component : withAuth(Component)
+  // const AuthenticatedComponent = Component.authPage ? Component : withAuth(Component)
 
   if (loading) {
     return <div>Loading...</div> // You can replace this with a proper loading component
@@ -79,13 +82,17 @@ const App = props => {
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
 
-      <SettingsProvider>
-        <SettingsConsumer>
-          {({ settings }) => {
-            return <ThemeComponent settings={settings}>{getLayout(<AuthenticatedComponent {...pageProps} />)}</ThemeComponent>
-          }}
-        </SettingsConsumer>
-      </SettingsProvider>
+      <KindeProvider>
+        <SettingsProvider>
+          <SettingsConsumer>
+            {({ settings }) => {
+              return <ThemeComponent settings={settings}>{getLayout(
+                <Component {...pageProps} />
+              )}</ThemeComponent>
+            }}
+          </SettingsConsumer>
+        </SettingsProvider>
+      </KindeProvider>
     </CacheProvider>
   )
 }

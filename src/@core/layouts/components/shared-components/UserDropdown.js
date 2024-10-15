@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect } from 'react'
 
 // ** Next Import
 import { useRouter } from 'next/router'
@@ -32,12 +32,39 @@ const BadgeContentSpan = styled('span')(({ theme }) => ({
   boxShadow: `0 0 0 2px ${theme.palette.background.paper}`
 }))
 
+// ** Logout Link Import
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
+// ** Kinde Auth Import
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
+
 const UserDropdown = () => {
   // ** States
   const [anchorEl, setAnchorEl] = useState(null)
+  const [userName, setUserName] = useState('User')
+  const [userAvatar, setUserAvatar] = useState('/images/avatars/1.png')
 
   // ** Hooks
   const router = useRouter()
+  const { isAuthenticated, user, getUser } = useKindeAuth()
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (isAuthenticated) {
+        try {
+          const userData = await getUser()
+          setUserName(userData.given_name || userData.family_name || 'User')
+          if (userData.picture) {
+            setUserAvatar(userData.picture)
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error)
+        }
+      }
+    }
+
+    fetchUser()
+  }, [isAuthenticated, getUser])
 
   const handleDropdownOpen = event => {
     setAnchorEl(event.currentTarget)
@@ -45,13 +72,10 @@ const UserDropdown = () => {
 
   const handleDropdownClose = url => {
     if (url) {
-      localStorage.removeItem('token');
       router.push(url)
-      
     }
     setAnchorEl(null)
   }
-  
 
   const styles = {
     py: 2,
@@ -77,10 +101,10 @@ const UserDropdown = () => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
         <Avatar
-          alt='John Doe'
+          alt={userName}
           onClick={handleDropdownOpen}
           sx={{ width: 40, height: 40 }}
-          src='/images/avatars/1.png'
+          src={userAvatar}
         />
       </Badge>
       <Menu
@@ -98,10 +122,10 @@ const UserDropdown = () => {
               badgeContent={<BadgeContentSpan />}
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             >
-              <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
+              <Avatar alt={userName} src={userAvatar} sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', marginLeft: 3, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 600 }}>John Doe</Typography>
+              <Typography sx={{ fontWeight: 600 }}>{userName}</Typography>
               <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }}>
                 Admin
               </Typography>
@@ -147,9 +171,16 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ py: 2 }} onClick={() => handleDropdownClose('/pages/login')}>
-          <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />
-          Logout
+        <MenuItem 
+          sx={{ py: 2 }} 
+          onClick={() => setAnchorEl(null)} // Close the menu when clicking logout
+        >
+          <LogoutLink>
+            <Box sx={styles}>
+              <LogoutVariant sx={{ marginRight: 2 }} />
+              Logout
+            </Box>
+          </LogoutLink>
         </MenuItem>
       </Menu>
     </Fragment>

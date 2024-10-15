@@ -77,13 +77,14 @@ const LoginPage = () => {
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
-  const { user, login } = useAuth()
 
-  useEffect(() => {
-    if (user) {
-      router.replace('/pages/createpost')
-    }
-  }, [user, router])
+  // const { user, login } = useAuth()
+
+  // useEffect(() => {
+  //   if (user) {
+  //     router.replace('/dashboard')
+  //   }
+  // }, [user, router])
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -109,8 +110,8 @@ const LoginPage = () => {
       
       // Handle successful login
       console.log('Login successful:', response.data.token.access)
-\      login(response.data.token.access)
-      router.replace('/')
+      login(response.data.token.access)
+      router.replace('/dashboard')
     } catch (error) {
       // Handle login error
       console.error('Login failed:', error)

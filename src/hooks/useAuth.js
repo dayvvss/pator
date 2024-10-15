@@ -20,9 +20,19 @@ export const useAuth = () => {
     checkAuth();
   }, []);
 
-  const login = (token) => {
-    localStorage.setItem('token', token);
-    setUser({ token });
+  const login = async (credentials) => {
+    // Disabled the login functionality
+    /*
+    try {
+      const response = await login(credentials); // Use kinde's login method
+      const { token } = response; // Adjust based on kinde's response structure
+      localStorage.setItem('token', token);
+      setUser({ token });
+    } catch (error) {
+      console.error('Login failed:', error);
+      // Handle error (e.g., show a message to the user)
+    }
+    */
   };
 
   const logout = () => {
