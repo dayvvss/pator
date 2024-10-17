@@ -1,20 +1,22 @@
-import { Box, Typography, Button, Grid, AppBar, Toolbar } from '@mui/material'
+import { Box, Typography, Button, Grid, AppBar, Toolbar, Card } from '@mui/material'
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/components';
 import { Stack } from '@mui/material';
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 import Image from 'next/image'
 import Mysvg from  '../../public/images/pages/undraw_social_media_re_sulg.svg'
+import Patorlogo from '../../public/images/logos/pator-logo.png'
+
+
 
 const Login = () => {
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Top Navigation */}
       
 
       <Grid container sx={{ flexGrow: 1 }}>
         {/* Left Column */}
-        <Grid item xs={12} md={5} sx={{
+        <Grid item xs={12} md={6} sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -23,14 +25,16 @@ const Login = () => {
           textAlign: 'center',
           
         }}>
-          <Typography variant='h3'>Welcome!</Typography>
-          <Typography variant='p' sx={{ mb: 2 }}>
+          <Card sx={{height:'50vh', p:8, alignContent:'center'}} >
+            <Image src={Patorlogo} alt='Pator Logo' width={'auto'} height={100} />
+          <Typography variant='h3' sx={{paddingY:'16px'}}>Welcome!</Typography>
+          {/* <Typography variant='p' sx={{ mb: 2 }}>
             Manage your social media effortlessly. Automate your posts and engage with your audience like never before.
-          </Typography>
-          <Typography variant='h6' sx={{ mb: 4 }}>
+          </Typography> */}
+          <Typography variant='p' sx={{ mx: 12, paddingY:'16px' }}>
             Log in to access your dashboard and take control of your social media strategy.
           </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt:8}}>
             <Stack direction="row" spacing={2}>
               {/* Styled Login Button without Shadow */}
               <Button variant="contained" disableElevation sx={{ mr: 2 }}>
@@ -60,6 +64,7 @@ const Login = () => {
               </Button>
             </Stack>
           </Box>
+          </Card>
         </Grid>
 
         {/* Right Column */}
